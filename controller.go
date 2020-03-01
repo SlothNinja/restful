@@ -165,7 +165,7 @@ func ToLower(s string) string {
 }
 
 func LogoutURL(c *gin.Context, redirect, label string) (template.HTML, error) {
-	return template.HTML(fmt.Sprintf("<a href='/logout'>%s</a>", label)), nil
+	return template.HTML(fmt.Sprintf("<a href='/user/logout'>%s</a>", label)), nil
 	// url, err := user.LogoutURL(c, redirect)
 	// if err != nil {
 	// 	return "", err
@@ -174,7 +174,7 @@ func LogoutURL(c *gin.Context, redirect, label string) (template.HTML, error) {
 }
 
 func LoginURL(c *gin.Context, redirect, label string) (tmpl template.HTML, err error) {
-	return template.HTML(fmt.Sprintf("<a href='/login'>%s</a>", label)), nil
+	return template.HTML(fmt.Sprintf("<a href='/user/login'>%s</a>", label)), nil
 	// url, err := user.LoginURL(c, redirect)
 	// if err != nil {
 	// 	return
