@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
 )
 
 var Builtins = template.FuncMap{
@@ -191,17 +190,17 @@ func comment(s string) template.HTML {
 	return template.HTML("<!-- " + s + " -->")
 }
 
-// BindWith binds the passed struct pointer using the specified binding engine.
-// Similar to gin#context.BindWith but does not write status code 400 to Header.
-// This method provides more flexibility, e.g., redirection on error.
-func BindWith(c *gin.Context, obj interface{}, b binding.Binding) error {
-	if err := b.Bind(c.Request, obj); err != nil {
-		c.Error(err).SetType(gin.ErrorTypeBind)
-		c.Abort()
-		return err
-	}
-	return nil
-}
+// // BindWith binds the passed struct pointer using the specified binding engine.
+// // Similar to gin#context.BindWith but does not write status code 400 to Header.
+// // This method provides more flexibility, e.g., redirection on error.
+// func BindWith(c *gin.Context, obj interface{}, b binding.Binding) error {
+// 	if err := b.Bind(c.Request, obj); err != nil {
+// 		c.Error(err).SetType(gin.ErrorTypeBind)
+// 		c.Abort()
+// 		return err
+// 	}
+// 	return nil
+// }
 
 func data(args ...interface{}) map[string]interface{} {
 	d := make(map[string]interface{}, len(args)/2)
