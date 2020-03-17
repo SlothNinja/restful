@@ -75,6 +75,25 @@ const (
 // 	return logging.SetLevel(dscache.FilterRDS(memory.Use(c)), logging.Debug)
 // }
 
+func ParseTemplates(path string, ext ...string) render.Render {
+	r := render.New()
+	r.TemplatesDir = path
+	r.Exts = ext
+	//	r.TemplatesDir = "templates/"
+	//	r.Exts = []string{".tmpl"}
+	if gin.IsDebugging() {
+		r.Debug = true
+	}
+	r.TemplateFuncMap = Builtins
+	return r.Init()
+}
+
+func AddTemplates(tmpls map[string]*template.Template) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		withTemplates(c, tmpls)
+	}
+}
+
 func TemplateHandler(engine *gin.Engine) gin.HandlerFunc {
 	r := render.New()
 	r.TemplatesDir = "templates/"
